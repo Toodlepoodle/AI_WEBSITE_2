@@ -37,22 +37,30 @@ function createProductCard(product) {
     `;
 }
 
+// Update product grid
 const productsGrid = document.getElementById('productsGrid');
 products.forEach(product => {
     productsGrid.innerHTML += createProductCard(product);
 });
 
-// Add smooth scrolling
+// Add smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
+        // Use scrollIntoView for smooth scrolling between sections or to external pages
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth'
+            });
+        } else {
+            // Handle navigation to different pages (like About page)
+            window.location.href = this.getAttribute('href');
+        }
     });
 });
 
-// Add animation on scroll
+// Add animation on scroll for product cards
 const productCards = document.querySelectorAll('.product-card');
 const observer = new IntersectionObserver(
     (entries) => {
